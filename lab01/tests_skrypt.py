@@ -36,7 +36,7 @@ def test_display_with_index(capsys):
     show_index = True
     skrypt.display(args, show_index)
     captured = capsys.readouterr()
-    expected_output = "args[0] =  foo\nargs[1] =  bar\nargs[2] =  test\n"
+    expected_output = "args[0] = foo\nargs[1] = bar\nargs[2] = test\n"
     assert captured.out == expected_output
 
 # Przypadek testowy 3: Sprawdź, czy funkcja działa poprawnie dla pustej listy argumentów

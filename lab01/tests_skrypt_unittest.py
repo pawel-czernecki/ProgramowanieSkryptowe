@@ -19,7 +19,7 @@ class TestRun(unittest.TestCase):
         args = ["foo", "bar", "test"]
         show_index = True
         skrypt.display(args, show_index)
-        expected_output = "args[0] =  foo\nargs[1] =  bar\nargs[2] =  test\n"
+        expected_output = "args[0] = foo\nargs[1] = bar\nargs[2] = test\n"
         self.assertEqual(stdout.getvalue(), expected_output)
 
     @patch('sys.stdout', new_callable=StringIO)

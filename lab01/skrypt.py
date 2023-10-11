@@ -2,7 +2,7 @@ import sys
 
 def display(args, show_index):
     for i, arg in enumerate(args):
-        print( f"args[{i}] =  {arg}" if show_index else arg)
+        print( f"args[{i}] = {arg}" if show_index else arg)
 
 moves_dictionary = {
     "f":"Zwierzak idzie do przodu",
