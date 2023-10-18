@@ -1,0 +1,26 @@
+{
+    "1": {
+        "id": 1,
+        "roomCapacity": 1,
+        "roomReservation": []
+    },
+    "2": {
+        "id": 2,
+        "roomCapacity": 2,
+        "roomReservation": [
+            {
+              "name": "Jan Kowalski",
+              "date": "10.10.2023-20.10.2023"
+            },
+            {
+              "name": "Janina Kowalska",
+              "date": "10.10.2023-20.10.2023"
+            }
+        ]
+    },
+    "3": {
+        "id": 3,
+        "roomCapacity": 2,
+        "roomReservation": []
+    }
+}
