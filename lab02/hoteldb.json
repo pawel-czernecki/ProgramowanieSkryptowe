@@ -6,14 +6,14 @@
     },
     "2": {
         "id": 2,
-        "roomCapacity": 2,
+        "roomCapacity": 4,
         "roomReservation": [
             {
-              "name": "Jan Kowalski",
+              "name": "Jan_Kowalski",
               "date": "10.10.2023-20.10.2023"
             },
             {
-              "name": "Janina Kowalska",
+              "name": "Janina_Kowalska",
               "date": "10.10.2023-20.10.2023"
             }
         ]
