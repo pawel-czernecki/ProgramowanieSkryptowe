@@ -125,3 +125,5 @@ def print_room_status(data):
 
 if __name__ == "__main__":
     main()
+
+#book Jan_Kowalski|01.11.2023-03.11.2023(1):31.12.2023-02.01.2024(2) Anna_Kowalska|31.12.2023-02.01.2024(2)
