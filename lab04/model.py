@@ -108,6 +108,9 @@ class Animal:
     def __repr__(self) -> str:
         return str(self)
 
+    def __hash__(self):
+        return hash(self.position)
+
     def isAt(self, position: Vector2d) -> bool:
         return self.position == position
 
