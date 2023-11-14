@@ -76,12 +76,13 @@ class InfiniteMap(WorldMap, IMoveValidator, IWorldMap):
             return
 
         min_x = min(animal.position.x for animal in self.animals.values())
-        max_x = max(animal.position.x for animal in self.animals.values())
         min_y = min(animal.position.y for animal in self.animals.values())
-        max_y = max(animal.position.y for animal in self.animals.values())
-
-        self.upperRight = Vector2d(max_x, max_y)
         self.lowerLeft = Vector2d(min_x, min_y)
+
+        max_x = max(animal.position.x for animal in self.animals.values())
+        max_y = max(animal.position.y for animal in self.animals.values())
+        self.upperRight = Vector2d(max_x, max_y)
+
 
     def __str__(self) -> str:
         self.setNewBounds()
