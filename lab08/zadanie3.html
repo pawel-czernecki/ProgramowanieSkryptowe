@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+</head>
+<body>
+<main>
+    <h1>Płótno</h1>
+    <canvas id="canvas" width="500" height="500" style="border:1px solid #000000;">
+        Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas"
+    </canvas>
+    <script>
+        "use strict"; // Nie wyłączaj trybu ścisłego
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = "#3498db";
+        ctx.fillRect(100, 150, 300, 150);
+
+        ctx.beginPath();
+        ctx.moveTo(100, 150);
+        ctx.lineTo(400, 150);
+        ctx.lineTo(250, 50);
+        ctx.closePath();
+        ctx.fillStyle = "#e74c3c";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(250, 100, 30, 0, 2 * Math.PI);
+        ctx.fillStyle = "#2ecc71";
+        ctx.fill();
+
+        ctx.font = "12px Arial";
+        ctx.fillStyle = "#000";
+        ctx.fillText("Hotel", 240, 100);
+    </script>
+</main>
+</body>
+</html>

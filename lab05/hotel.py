@@ -1,0 +1,130 @@
+from datetime import datetime, date
+import sys
+from typing import Final
+
+class Room:
+    def __init__(self, number, capacity, price):
+        self.number = number
+        self.capacity = capacity
+        self.price = price
+        self.bookings = []
+
+    def __str__(self):
+        guest_info = "\nGoście:\n"
+        current_guests = 0
+        today = datetime.today()
+        for booking in self.bookings:
+            guest_info += f"        {booking.guest.name}   {booking.start}    {booking.end}\n"
+            if booking.start <= today <= booking.end:
+                print(booking, today)
+                current_guests += 1
+        return f"Numer: {self.number}\nMaksymalna liczba osób: {self.capacity}\nAktualna liczba osób: {current_guests}\nCena: {self.price}\n{guest_info}"
+
+    def __repr__(self):
+        guest_info = "\nGoście:\n"
+        current_guests = 0
+        today = datetime.today()
+        print(self.bookings)
+        for booking in self.bookings:
+            if booking.start <= today <= booking.end:
+                current_guests += 1
+        return f"nr: {self.number} Aktualna liczba osób: {current_guests}"
+
+class Guest:
+    def __init__(self, last_name, first_name):
+        self.last_name = last_name
+        self.first_name = first_name
+        self.bookings = []
+
+    def book(self, room, check_in_date, check_out_date):
+        booking = Reservation(room, check_in_date, check_out_date)
+        room.bookings.append(booking)
+        self.bookings.append(booking)
+
+    def __str__(self):
+        booking_info = ""
+        for booking in self.bookings:
+            booking_info += f"Pokój nr {booking.room.number} {booking.start}     {booking.end}\nDo zapłaty: {booking.room.price} złotych\n"
+        return f"{self.first_name} {self.last_name}\n{booking_info}"
+
+    def __repr__(self):
+        return f"{self.first_name} {self.last_name}"
+
+class Reservation:
+    def __init__(self, room: Room, start: date, end: date):
+        self.room = room
+        self.start = start
+        self.end = end
+
+class Hotel:
+    rooms: Final = [
+        Room(1, 1, 150),
+        Room(2, 3, 250),
+        Room(3, 2, 200),
+        Room(4, 2, 200),
+        Room(5, 3, 280)
+    ]
+
+    def __init__(self):
+        self.guests = {}  # Dictionary to store guests and their reservations
+
+    def reserve_room(self, last_name, first_name, room_number, check_in_date, check_out_date):
+        room = next((r for r in self.rooms if r.number == room_number), None)
+        if not room:
+            print("Niepoprawny numer pokoju.")
+            return
+
+        guest_key = (last_name, first_name)
+        guest = self.guests.get(guest_key)
+
+        if not guest:
+            guest = Guest(last_name, first_name)
+            self.guests[guest_key] = guest
+
+        guest.book(room, check_in_date, check_out_date)
+        print(f"Rezerwacja zrealizowana:\n{guest}\n{room}\nTermin: {check_in_date} - {check_out_date}")
+
+    def display_guest_reservations(self, last_name, first_name):
+        guest_key = (last_name, first_name)
+        guest = self.guests.get(guest_key)
+
+        if guest:
+            print(f"Rezerwacje dla gościa {guest}:")
+            for reservation in guest.bookings:
+                print(f"Pokój {reservation.room.number}, {reservation.start} - {reservation.end}")
+        else:
+            print(f"Brak gościa o imieniu {first_name} i nazwisku {last_name}")
+
+    def display_reservations_in_date_range(self, start_date, end_date):
+        print(f"Rezerwacje w okresie {start_date} - {end_date}:")
+        for guest in self.guests.values():
+            for reservation in guest.bookings:
+                if start_date <= reservation.start <= end_date or start_date <= reservation.end <= end_date:
+                    print(f"{guest} - Pokój {reservation.room.number} - Cena {reservation.room.price} złotych , {reservation.start} - {reservation.end}")
+
+def main():
+    hotel = Hotel()
+
+    for line in sys.stdin:
+        lines_arg = line.removesuffix('\n').split(' ')
+        if lines_arg[0] == "rooms":
+            print(hotel.rooms)
+        elif lines_arg[0] == "guest":
+            if len(lines_arg) >= 3:
+                hotel.display_guest_reservations(lines_arg[1], lines_arg[2])
+            else:
+                print(hotel.guests)
+        elif lines_arg[0] == "book":
+            hotel.reserve_room(lines_arg[5], lines_arg[6], int(lines_arg[1]), datetime.strptime(lines_arg[2], "%Y-%m-%d"), datetime.strptime(lines_arg[3], "%Y-%m-%d"))
+        elif lines_arg[0] == "date":
+            hotel.display_reservations_in_date_range(datetime.strptime(lines_arg[1], "%Y-%m-%d"), datetime.strptime(lines_arg[2], "%Y-%m-%d"))
+        else:
+            print("Nieznana komenda")
+
+if __name__ == "__main__":
+    main()
+
+# book 1 2021-05-01 2021-05-10 12345678901 Jan Kowalski
+# book 1 2021-05-01 2021-05-10 12345678954 Aneta Nowak
+# guest Jan Kowalski
+# date 2021-04-01 2021-05-15
