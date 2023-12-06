@@ -33,12 +33,12 @@ nav li {
 
 .content-container{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
 }
 
-@media (max-width: 792px) {
+@media (min-width: 792px) {
     .content-container{
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
