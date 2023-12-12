@@ -67,7 +67,7 @@ function executeCommand() {
 
 function bookRoom(params) {
     const roomNumber = parseInt(params[0]);
-    const guestFullName = params.slice(1).join(' ');
+    const guestFullName = params.slice(1);
 
     const transaction = db.transaction([roomStoreName, guestStoreName], 'readwrite');
     const roomStore = transaction.objectStore(roomStoreName);
@@ -133,7 +133,9 @@ function displayGuests() {
         const cursor = event.target.result;
 
         if(cursor){
-            roomGuestPairs[cursor.key] = cursor.guests;
+            cursor.value.guests.forEach(item => {
+                roomGuestPairs[item] = cursor.key;
+            })
             cursor.continue();
         }
     }
@@ -146,7 +148,7 @@ function displayGuests() {
 
         if (cursor) {
             console.log(`Id: ${cursor.key}, Imię i nazwisko: ${cursor.value.firstName} ${cursor.value.lastName}`);
-            console.log(`Rezerwacje: ${roomGuestPairs[cursor.key] ?? "Brak"}`)
+            console.log(`Rezerwacje: ${roomGuestPairs[cursor.value.firstName+','+cursor.value.lastName] ?? "Brak"}`)
             cursor.continue();
         }
     };
@@ -169,7 +171,10 @@ function displayHotelStatus() {
         const cursor = event.target.result;
 
         if (cursor) {
-            console.log(`Pokój ${cursor.value.number}: ${cursor.value.availability} dostępnych miejsc : goście: ${cursor.value.guest ?? "brak"}`);
+            console.group(`Pokój ${cursor.value.number}`);
+            console.log(`${cursor.value.availability} dostępnych miejsc`);
+            console.log(`goście: ${cursor.value.guests ?? "brak"}`);
+            console.groupEnd();
             cursor.continue();
         }
     };
