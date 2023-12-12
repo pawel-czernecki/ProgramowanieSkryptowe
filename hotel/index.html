@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hotel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Nawigacja -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"> 
+              <i class="bi bi-building-fill-check"></i> Hotel P.C.
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Oferta
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Noclegi</a>
+                            <a class="dropdown-item" href="#">Wyżywienie</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Atrakcje</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Zarezerwuj</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Zawartość strony -->
+    <div class="container mt-4">
+        <h1 class="mb-3">Witaj na stronie naszego hotelu!</h1>
+        <div class="row p-4">
+          <div class="col">
+            <div class="card w-100">
+              <div class="card-body">
+                <h5 class="card-title">Command Line</h5>
+                <input type="text" id="cmd-line" class="form-control">
+                <br>
+                <button class="btn btn-primary" onClick="executeCommand();">Wykonaj</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <style>
+                    @keyframes floatAnimation {
+                        0% {
+                            transform: translateY(0);
+                        }
+                        50% {
+                            transform: translateY(-20px);
+                        }
+                        100% {
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .floatAnimation{
+                        animation: floatAnimation 2s infinite;
+                    }
+                  </style>
+                <div class="card w-100 floatAnimation">
+                    <img src="https://placekitten.com/1000/300" class="card-img-top" alt="Kotki">
+                    <div class="card-body">
+                      <h5 class="card-title">Dostępne terminy</h5>
+                      <table class="table">
+                        <thead class="table-dark">
+                          <tr>
+                            <th scope="col">Miesiąc</th>
+                            <th scope="col">Terminy</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>XI</td>
+                            <td>14-21,21-24</td>
+                          </tr>
+                          <tr>
+                            <td>XII</td>
+                            <td>7-14, 27-31</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <a href="#" class="btn btn-primary">Zarezerwuj</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row p-4">
+            <div class="col-md-4">
+                <div class="card w-100 my-1">
+                    <img src="https://placekitten.com/450/450" class="card-img-top" alt="Kotki2">
+                    <div class="card-body">
+                      <h5 class="card-title">Cena noclegu</h5>
+                      <p class="card-text">
+                          <ul>
+                              <li>Pokój 1-osobowy - 200zł</li>
+                              <li>Pokój 2-osobowy - 250zł</li>
+                          </ul>
+                      </p>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="card w-100 my-1">
+                    <img src="https://placekitten.com/500/500" class="card-img-top" alt="Kotki3">
+                    <div class="card-body">
+                      <h5 class="card-title">Adres</h5>
+                      <p class="card-text">
+                          Królewska 123
+                          30-123 Kraków
+                      </p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="card w-100">
+                    <div class="card-body">
+                      <h5 class="card-title">Widok z okolicy</h5>
+                    </div>
+                    <div class="embed-responsive embed-responsive-16by9 w-100 p-2 mx-auto">
+                        <iframe class="embed-responsive-item w-100" src="https://www.youtube.com/embed/kF_h9gl-vyw?si=28P3syn7XfUJ7yse" allowfullscreen></iframe>
+                      </div>
+                  </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+    <footer class="footer bg-light text-right p-3 mt-4">
+        <div class="d-flex flex-row-reverse">
+          &copy; Paweł Czernecki
+        </div>
+      </footer>
+
+    <!-- Bootstrap JavaScript i skrypty zależne -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cmd.js"></script>
+</body>
+
+</html>
