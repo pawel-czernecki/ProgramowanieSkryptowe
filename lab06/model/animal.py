@@ -21,8 +21,10 @@ class Animal:
         update_map = {
             MoveDirection.RIGHT: lambda obj: setattr(obj, 'orientation', obj.orientation + 1),
             MoveDirection.LEFT: lambda obj: setattr(obj, 'orientation', obj.orientation + (-1)),
-            MoveDirection.FORWARD: lambda obj: setattr(obj, 'position', obj.position + obj.orientation.toUnitVector()) if validator.canMoveTo(obj.position + obj.orientation.toUnitVector()) else obj,
-            MoveDirection.BACKWARD: lambda obj: setattr(obj, 'position', obj.position - obj.orientation.toUnitVector()) if validator.canMoveTo(obj.position - obj.orientation.toUnitVector()) else obj
+            MoveDirection.FORWARD: lambda obj: setattr(obj, 'position', obj.position + obj.orientation.toUnitVector())
+            if validator.canMoveTo(obj.position + obj.orientation.toUnitVector()) else obj,
+            MoveDirection.BACKWARD: lambda obj: setattr(obj, 'position', obj.position - obj.orientation.toUnitVector())
+            if validator.canMoveTo(obj.position - obj.orientation.toUnitVector()) else obj
         }
         return update_map.get(direction, lambda obj: obj)
 
