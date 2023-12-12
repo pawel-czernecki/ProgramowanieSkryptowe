@@ -1,0 +1,218 @@
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet"
+        href="sheets.css"
+        media="screen"
+        type="text/css">
+  <title>Tytuł strony</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+<body>
+  <header class="box--foobar azure--foobar">
+    <!-- Page title -->
+    <!-- Background color: #EFF -->
+    <!-- Border color: #A8A8A8 -->
+    <h1 class="h1class--foobar">Tytuł strony</h1>
+  </header>
+  <div class="content-container--foobar">
+    <div class="content-container__left--foobar">
+      <nav class="box--foobar azure--foobar">
+        <!--Tutaj menu nawigacyjne / Here the navigation menu -->
+        <!-- left & right margin: 25px -->
+        <ul>
+          <li>
+            <a href="">Element 1</a>
+          </li>
+          <li>
+            <a href="">Element 2</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="box--foobar azure--foobar">
+        <button id="set-button">Set</button>
+        <button id="delete-button">Delete</button>
+        <button id="add-button">Add</button>
+      </div>
+      <!-- Tutaj treść panelu bocznego / Here the content of the side panel-->
+      <main class="box--foobar azure--foobar">
+        <!--Tutaj treść strony / Here the content of the page -->
+        <h1 class="h1class--foobar">Treść strony</h1>
+        <blockquote class="blockquote--foobar" id="mainContent">
+        </blockquote>
+      </main>
+    </div>
+    <aside class="box--foobar azure--foobar">
+      <h1 class="h1class--foobar">Panel boczny</h1>
+      <h2>Ciekawe odsyłacze</h2>
+      <ul>
+        <li>
+          <a href="">Odsyłacz 1</a>
+        </li>
+        <li>
+          <a href="">Odsyłacz 2</a>
+        </li>
+        <li>
+          <a href="">Odsyłacz 3</a>
+        </li>
+      </ul>
+    </aside>
+  </div>
+  <footer class="box--foobar azure--foobar">
+    <!-- Tutaj treść stopki / Here the content of the footer -->
+    <a href="mailto:your.email.address">Imię Nazwisko</a>
+  </footer>
+
+  <script>
+    function removeClasses(selector, className) {
+      const elements = document.querySelectorAll(selector);
+
+      elements.forEach(element => {
+        element.classList.remove(className);
+      });
+    }
+
+    function addClasses(selector, className) {
+      const elements = document.querySelectorAll(selector);
+
+      elements.forEach(element => {
+        element.classList.add(className);
+      });
+    }
+
+    classesToEnable = [
+      'box', 'azure', 'blockquote', 'content-container', 'content-container__left', 'h1class'
+    ]
+
+
+    document.getElementById('set-button').addEventListener('click', ()=>{
+      classesToEnable.forEach(item=>{
+        addClasses('.'+item+'--foobar', item)
+      })
+    })
+
+    document.getElementById('delete-button').addEventListener('click', ()=>{
+      classesToEnable.forEach(item=>{
+        removeClasses('.'+item+'--foobar', item)
+      })
+    })
+
+    const koncertWojskiego = `Natenczas Wojski chwycił na taśmie przypięty
+
+Swój róg bawoli, długi, cętkowany, kręty
+
+Jak wąż boa, oburącz do ust go przycisnął,
+
+Wzdął policzki jak banię, w oczach krwią zabłysnął,
+
+Zasunął wpół powieki, wciągnął w głąb pół brzucha
+
+I do płuc wysłał z niego cały zapas ducha,
+
+I zagrał: róg jak wicher, wirowatym dechem
+
+Niesie w puszczę muzykę i podwaja echem.
+
+Umilkli strzelcy, stali szczwacze zadziwieni
+
+Mocą, czystością, dziwną harmoniją pieni.
+
+Starzec cały kunszt, którym niegdyś w lasach słynął,
+
+Jeszcze raz przed uszami myśliwców rozwinął;
+
+Napełnił wnet, ożywił knieje i dąbrowy,
+
+Jakby psiarnię w nie wpuścił i rozpoczął łowy.
+
+Bo w graniu była łowów historyja krótka:
+
+Zrazu odzew dźwięczący, rześki: to pobudka;
+
+Potem jęki po jękach skomlą: to psów granie;
+
+A gdzieniegdzie ton twardszy jak grzmot: to strzelanie.
+
+Tu przerwał, lecz róg trzymał; wszystkim się zdawało,
+
+Że Wojski wciąż gra jeszcze, a to echo grało.
+
+Zadął znowu; myśliłbyś, że róg kształty zmieniał
+
+I że w ustach Wojskiego to grubiał, to cieniał,
+
+Udając głosy zwierząt: to raz w wilczą szyję
+
+Przeciągając się, długo, przeraźliwie wyje,
+
+Znowu jakby w niedźwiedzie rozwarłszy się garło,
+
+Ryknął; potem beczenie żubra wiatr rozdarło.
+
+Tu przerwał, lecz róg trzymał; wszystkim się zdawało,
+
+Że Wojski wciąż gra jeszcze, a to echo grało.
+
+Wysłuchawszy rogowej arcydzieło sztuki,
+
+Powtarzały je dęby dębom, bukom buki.
+
+Dmie znowu: jakby w rogu były setne rogi,
+
+Słychać zmieszane wrzaski szczwania, gniewu, trwogi,
+
+Strzelców, psiarni i zwierząt; aż Wojski do góry
+
+Podniósł róg, i tryumfu hymn uderzył w chmury.
+
+Tu przerwał, lecz róg trzymał; wszystkim się zdawało,
+
+Że Wojski wciąż gra jeszcze, a to echo grało.
+
+Ile drzew, tyle rogów znalazło się w boru,
+
+Jedne drugim pieśń niosą jak z choru do choru.
+
+I szła muzyka coraz szersza, coraz dalsza,
+
+Coraz cichsza i coraz czystsza, doskonalsza,
+
+Aż znikła gdzieś daleko, gdzieś na niebios progu!
+
+Wojski obiedwie ręce odjąwszy od rogu
+
+Rozkrzyżował; róg opadł, na pasie rzemiennym
+
+Chwiał się. Wojski z obliczem nabrzmiałym, promiennym,
+
+Z oczyma wzniesionymi, stał jakby natchniony,
+
+Łowiąc uchem ostatnie znikające tony.`
+
+        const mainContent = document.getElementById('mainContent');
+        const addButton = document.getElementById('add-button');
+
+        const paragraphs = koncertWojskiego.split('\n\n');
+        let currentParagraphIndex = 0;
+
+        function addParagraph() {
+            if (currentParagraphIndex < paragraphs.length) {
+                const newParagraph = document.createElement('p');
+                const paragraphText = document.createTextNode(paragraphs[currentParagraphIndex]);
+                newParagraph.appendChild(paragraphText);
+                mainContent.appendChild(newParagraph);
+                currentParagraphIndex++;
+
+                if (currentParagraphIndex === paragraphs.length) {
+                    addButton.disabled = true;
+                }
+            }
+        }
+
+        addButton.addEventListener('click', addParagraph)
+
+
+  </script>
+</body>
+</html>
