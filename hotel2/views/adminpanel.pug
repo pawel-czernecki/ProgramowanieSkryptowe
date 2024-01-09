@@ -1,0 +1,41 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title Second Express application
+        style.
+            table {
+                width: 100%;
+            }
+            td {
+                border: 1px solid #000; 
+                padding: 15px;
+                text-align: left;
+            }
+            th {
+                background-color: #04AA6D;
+                color: white;
+            }
+    body
+        main
+            h1 Witaj w panelu administratora
+            br
+            h2 Lista pokoi
+            if rooms && rooms.length > 0
+                each room in rooms
+                    p= room.id
+            else
+                p Nie znaleziono żadnych pokoi
+            h2 Lista rezerwacji
+            table
+                thead
+                    tr
+                        th Klient
+                        th Pokój
+                tbody
+                    if reservations && reservations.length > 0
+                        each reservation in reservations
+                            tr
+                                td= reservation.client
+                                td= reservation.room
