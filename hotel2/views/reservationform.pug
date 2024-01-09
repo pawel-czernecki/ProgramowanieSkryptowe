@@ -20,15 +20,15 @@ html(lang='en')
     body
         main
             h1 Rezerwacja pokoju
-            form(method='POST' action='/client/add')
-                label(for='name') Podaj imie i nazwisko
-                input(name='name')
+            form(method='POST' action='/client/add-reservation')
+                label(for='client') Podaj imie i nazwisko
+                input(name='client')
                 br
                 label(for='room') Wybierz pokój
                 if rooms && rooms.length > 0
                     select(name='room')
-                    each room in rooms
-                        option(value=room.id) #{room.id}
+                        each room in rooms
+                            option(value=room.id) #{room.id}
                 else
                     p Uwaga! Nie znaleziono żadnych pokoi
                 br

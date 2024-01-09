@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "Tset",
   "version": "1.0.0",
   "description": "",
   "main": "app2.js",
@@ -19,8 +19,8 @@
   "keywords": [],
   "author": {
     "name": "",
-    "email": "",
-    "url": ""
+    "email": "Tset",
+    "url": "Tset"
   },
   "contributors": [],
   "scripts": {

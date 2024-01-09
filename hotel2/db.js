@@ -6,6 +6,5 @@ const dbName = 'hotel';
 export default async function(){
     const client = new MongoClient(url);
     await client.connect();
-    const db = client.db(dbName);
-    return db
+    return client.db(dbName);
 };
