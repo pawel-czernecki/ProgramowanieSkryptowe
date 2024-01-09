@@ -20,6 +20,11 @@ html(lang='en')
                 color: white;
             }
         script.
+            function myAlert(message) {
+                document.getElementById('foobar').innerHTML = message
+            }
+            window.alert = myAlert;
+
             /**************************************************************************************/
             /* Function that retrieves the content of one of the selected text fields of the form */
             /**************************************************************************************/
@@ -120,7 +125,7 @@ html(lang='en')
             /* response_type ∈ ["text", "json", "xml"]                                            */ 
             /* name - Contents of the form's text box - data that needs to be sent asynchronously */
             /**************************************************************************************/
-            function requestFetchAPI(http_method, response_type, name, show_alert=false) {
+            async function requestFetchAPI(http_method, response_type, name, show_alert=false) {
                 let accept = '*/*';
 
                 switch(response_type){
@@ -134,60 +139,49 @@ html(lang='en')
                 //--------------------------------------------------------------------------
                 // Configuration and execution of the (asynchronous) query to the web server
                 //--------------------------------------------------------------------------
-                fetch('http://localhost:8000/submit?name='+name, {
+                try {
+                  const response = await fetch(`http://localhost:8000/submit?name=${name}`, {
                     method: http_method,
-                    credentials: "include", // Do not modify or remove
+                    credentials: "include",
                     headers: {
-                        //****************************************************************************************
-                        // What is the acceptable data type—the server part should return data of the given type
-                        //****************************************************************************************
-                        Accept: accept
-                    }
-                }) // a promise is created
-                .then(function (response) { // if the promise is fulfilled
-                    if (!response.ok)
-                        throw Error(response.statusText);
+                      Accept: accept,
+                    },
+                  });
 
-                    let result;
+                  if (!response.ok) {
+                    throw new Error(response.statusText);
+                  }
 
+                  let result;
+
+                  if (response_type === 'json') {
+                    result = await response.json();
+                  } else if (response_type === 'xml') {
+                    result = await response.text();
+                  } else {
+                    result = await response.text();
+                  }
+
+                  console.group('Fetch API');
+                  console.log(`HTTP method ⟶\t\t${http_method}\nResponse type ⟶\t${response_type}\nInput data ⟶\t\t${name}`);
+                  console.log(result);
+                  console.groupEnd();
+
+                  if (show_alert) {
                     if (response_type === 'json') {
-                        // If the received data is a JSON document
-                        result = response.json();
-                    } else if (response_type === 'xml') {
-                        // If the received data is an XML document
-                        result = response.text();
+                      window.alert(JSON.stringify(result));
+                    } else if (response_type === 'document') {
+                      window.alert(new XMLSerializer().serializeToString(result.documentElement));
+                    } else {
+                      window.alert(result);
                     }
-                    else {
-                        // If the received data is a text document
-                        result = response.text();
-                    }
-                    return result
-                })
-               .then(function (result){
-                    console.group('Fetch API');
-                    console.log(`HTTP method ⟶\t\t${http_method}\nResponse type ⟶\t${response_type}\nInput data ⟶\t\t${name}`);
-
-                    console.log(result);
-                    console.groupEnd();
-                    if(show_alert)
-                        if (response_type === 'json') {
-                            // If the received data is a JSON document
-                            window.alert(JSON.stringify(result));
-                        } else if (response_type === 'document') {
-                            // If the received data is an XML document
-                            window.alert(new XMLSerializer().serializeToString(result.documentElement));
-                        } else {
-                            // If the received data is a text document
-                            window.alert(result);
-                        }
-                    else {
-                        results.set(`fetch ${http_method} ${response_type}`, result);
-                        dispatchEvent(received);
-                    }
-                })
-                .catch(function (error) { // if the promise is rejected
-                    window.alert(error);
-                });
+                  } else {
+                    results.set(`fetch ${http_method} ${response_type}`, result);
+                    dispatchEvent(received);
+                  }
+                } catch (error) {
+                  window.alert(error);
+                }
             }
         script(src="https://unpkg.com/mocha/mocha.js") 
         script(type="module").
@@ -198,6 +192,7 @@ html(lang='en')
             mocha.setup('bdd');
             mocha.checkLeaks(); 
         main
+            div(id='foobar')
             table
                 tr
                     th  
@@ -236,6 +231,33 @@ html(lang='en')
                                 button(onclick=`console.clear() ; requestFetchAPI('${method}','${type}', getName('${method}'), true)`) #{type}
         h1 Unit tests
         button(onclick='window.location.reload();') Restart
+
+        form(id="timeForm")
+              label(for="city") Nazwa miasta
+              input(type="text", name="city", id="city", required)
+              button(type="button", onclick="getTime()") Czas
+
+        div(id="result")
+
+        script.
+            function getTime() {
+              const city = document.getElementById('city').value;
+              fetch(`http://worldtimeapi.org/api/timezone/Europe/${city}`)
+                .then(response => {
+                  if (!response.ok) {
+                    throw Error(response.statusText);
+                  }
+                  return response.json();
+                })
+                .then(result => {
+                  document.getElementById('result').innerHTML = `<p>Czas: ${result.utc_datetime}</p>`;
+                })
+                .catch(error => {
+                  document.getElementById('result').innerHTML = `<p>Błąd: ${error}</p>`;
+                });
+            }
+
+
         div(id="mocha")
         script.
             const name = 'John Doe ą/?:@&=+$#';
