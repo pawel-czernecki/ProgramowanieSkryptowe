@@ -12,6 +12,12 @@ app.use(morgan('dev'));
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use((req, res, next) => {
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Content-Security-Policy', 'default-src \'self\'');
+  next();
+});
+
 const mongoDBUrl = 'mongodb://admin:admin@localhost:27017';
 const dbName = 'hotel';
 async function connectToDB() {
